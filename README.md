@@ -108,7 +108,7 @@ The procedure follows a three-stage pipeline at each training step $t$:
 Given the predictive solving-state belief $\mu_t^{\tau,\text{prior}} = \mathbb{P}(z_t \mid y_{1:t-1})$ for each prompt $\tau$, we prioritize prompts according to their predicted probability of being partially solved (State $2$), denoted $\mu_t^{\tau,\text{prior}}(2)$. Formally, the $B$ prompts with the highest State $2$ probabilities are selected to constitute the training batch at step $t$:
 
 $$
-\mathcal{B}_t = \mathrm{Top}_B\left(\left\{\tau \in \mathcal{D} \mid \mu_t^{\tau,\text{prior}}(2) \right\} \right).
+\mathcal{B}_t = \mathrm{Top}_B\Big(\Big\{\tau \in \mathcal{D} \mid \mu_t^{\tau,\text{prior}}(2) \Big\} \Big).
 $$
 
 > 💡 **Note:** DPS naturally supports alternative selection strategies, e.g., entropy regularized selection.
