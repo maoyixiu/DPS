@@ -1,0 +1,42 @@
+hydra:
+  searchpath:
+    - file://verl/trainer/config
+
+defaults:
+  - ppo_trainer
+  - _self_
+
+data:
+  gen_batch_size: ${data.train_batch_size}
+
+
+reward_model:
+  reward_manager: naive
+  overlong_buffer: 
+    enable: False # We try to avoid forgetting to set enable
+    len: 0
+    penalty_factor: 0.0
+    log: False
+
+algorithm:
+  filter_groups:
+    enable: False # We try to avoid forgetting to set enable
+    metric: null # acc / score / seq_reward / seq_final_reward / ...
+    max_num_gen_batches: 0 # Non-positive values mean no upper limit
+    filter_min: 0.0
+    filter_max: 1.0
+
+trainer:
+  project_name: verl-our
+
+
+tasksampler:
+  framework: 1 # 0: uniform; 1: dps
+  candidate_ratio: 1.0 # ratio of candidates to sample from
+  metric: "acc" # acc/score
+  hmm_no_update: False # if True, do not update HMM with new samples, i.e., keep the initial HMM fixed throughout training
+  hmm_prior_alpha: 1.0 # float / "stay" / "increase"
+  hmm_prior_pi: "uniform" # "uniform" / "1" / "2" / "3" 
+  hmm_sample_strategy: "topk" # "uniform" / "topk" / "topk+entropy"
+  hmm_transition_decay_ratio: 1.0 # decay ratio for old transition counts when updating HMM with new samples
+  hmm_entropy_weight: 0.0 # weight for entropy when using "topk+entropy" sampling strategy
