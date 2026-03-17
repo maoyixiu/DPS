@@ -124,7 +124,7 @@ ENV/
 logs
 log
 outputs/
-data/
+# data/
 *.whl
 python-envs/
 *.whl.4
